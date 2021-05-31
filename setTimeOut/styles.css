@@ -1,0 +1,13 @@
+.timout-color {
+    width: 200px;
+    height: 200px;
+    margin: 100px auto;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
