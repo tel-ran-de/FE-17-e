@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wrapper {
+    width: 1000px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+#users, #todos {
+    width: 45%;
+}
+
+.users-list, .todos-list {
+    list-style: none;
+}
+
+.users-list li {
+    margin: 5px 0;
+    padding: 1px;
+    border: 1px solid #777;
+    color: #777;
+    cursor: pointer;
+}
+
+.users-list li:hover {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.todos-list li {
+    margin: 5px 0;
+    padding: 1px;
+    color: rgb(4, 203, 27);
+    font-weight: bold;
+}
+
+.todos-list li.complited {
+    color: red;
+    text-decoration: line-through;
+}
