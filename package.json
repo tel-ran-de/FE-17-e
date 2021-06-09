@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/tel-ran-de/FE-17-e/issues"
   },
-  "homepage": "https://github.com/tel-ran-de/FE-17-e#readme"
+  "homepage": "https://github.com/tel-ran-de/FE-17-e#readme",
+  "dependencies": {
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
+  }
 }
