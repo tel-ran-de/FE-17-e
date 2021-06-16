@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Form from "./components/Form";
+
+class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state={
+      title: 'My ToDo List',
+      todos: []
+    }
+  }
+
+  addNewToDo = async (item) => {
+    await this.setState(
+      {...this.state, 
+        todos: [...this.state.todos, {id: Date.now(), title: item, completed: false}]
+      }
+    )
+    console.log( this.state.todos );
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <h1 className="text-center mt-3">{this.state.title}</h1>
+        <section id="form">
+          <Form onAdd={this.addNewToDo} />
+        </section>
+        <section id="list"></section>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
