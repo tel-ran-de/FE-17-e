@@ -11,7 +11,8 @@ const Form = ({onAdd}) => {
 
     const onSubmitHandle = event => {
         event.preventDefault()
-        onAdd(todoItem)
+        if (!todoItem.trim().length) return null
+        onAdd(todoItem.trim())
         setTodoItem('')
     }
 
