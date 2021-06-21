@@ -1,9 +1,11 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, Component, createContext } from "react";
 
-import Form from "./components/Form";
-import TodoList from './components/TodoList.jsx'
+import Form from "./Form";
+import TodoList from './TodoList.jsx'
 
-class App extends Component {
+export const TodoContext = createContext(null)
+
+class TodoApp extends Component {
 
   constructor(props) {
     super(props)
@@ -45,15 +47,18 @@ class App extends Component {
           <Form onAdd={this.addNewToDo} />
         </section>
         <section id="list">
-          <TodoList 
-            todos={this.state.todos} 
-            onComplete={this.changeCompleteProp} 
-            onDelete={this.deleteItem}  
+          <TodoContext.Provider value={{
+            onComplete: this.changeCompleteProp,
+            onDelete: this.deleteItem
+          }}>
+            <TodoList 
+            todos={this.state.todos}
           />
+          </TodoContext.Provider>
         </section>
       </Fragment>
     );
   }
 }
 
-export default App;
+export default TodoApp;

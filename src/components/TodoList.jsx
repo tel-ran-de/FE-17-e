@@ -2,7 +2,7 @@ import React from 'react'
 
 import TodoItem from './TodoItem'
 
-const TodoList = ({todos, onComplete, onDelete}) => {
+const TodoList = ({todos}) => {
 
 
     return (
@@ -11,9 +11,7 @@ const TodoList = ({todos, onComplete, onDelete}) => {
                 <ul className="list-group">
                     { todos.map( t =>   <TodoItem 
                                             key={t.id}
-                                            todo={t} 
-                                            onCompleteItem={onComplete}
-                                            onDeleteItem={onDelete}
+                                            todo={t}
                                         /> ) }
                 </ul>
             </div>

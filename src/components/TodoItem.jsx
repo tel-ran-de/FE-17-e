@@ -1,18 +1,20 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { TodoContext } from './TodoApp'
 
-const TodoItem = ({todo, onCompleteItem, onDeleteItem}) => {
+import { Button } from './Button'
+
+const TodoItem = ({todo}) => {
+
+    const {onDelete} = useContext(TodoContext)
 
     return (
         <li className="list-group-item d-flex justify-content-between align-items-center">
             <div className={ todo.completed ? 'text-danger text-decoration-line-through' : '' }>{todo.title}</div>
             <div>
-                <button 
-                    className="btn btn-sm btn-success mx-2"
-                    onClick={ () => { onCompleteItem(todo.id) } }    
-                >Complete</button>
+                <Button id={todo.id} />
                 <button 
                     className="btn btn-sm btn-danger"
-                    onClick={ ()=> { onDeleteItem(todo.id) } }    
+                    onClick={ ()=> { onDelete(todo.id) } }    
                 >Delete</button>
             </div>
         </li>
