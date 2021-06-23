@@ -13,7 +13,10 @@ class TodoApp extends Component {
       title: 'My ToDo List',
       todos: [{id:1, title: 'Hello', completed: false}]
     }
+    console.log('Contsructor');
   }
+
+
 
   addNewToDo = (item) => {
     this.setState(
@@ -39,26 +42,58 @@ class TodoApp extends Component {
     this.setState({...this.state, todos: _todos})
   }
 
+  
+
   render() {
+    console.log('Render');
     return (
       <Fragment>
         <h1 className="text-center mt-3">{this.state.title}</h1>
         <section id="form">
-          <Form onAdd={this.addNewToDo} />
+          <TodoContext.Provider value={{hello: 'Hello World'}}>
+            <Form onAdd={this.addNewToDo} />
+          </TodoContext.Provider>
         </section>
         <section id="list">
           <TodoContext.Provider value={{
             onComplete: this.changeCompleteProp,
-            onDelete: this.deleteItem
+            onDelete: this.deleteItem,
+            todos: this.state.todos
           }}>
-            <TodoList 
-            todos={this.state.todos}
-          />
+            <TodoList />
           </TodoContext.Provider>
         </section>
       </Fragment>
     );
   }
+
+  componentDidMount() {
+    console.log('DidMount');
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({...this.state, todos: [...this.state.todos, ...data]})
+      })
+      .catch (err => {
+        console.log(err.message);
+      })
+    
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('ShouldUpdate', nextProps, nextState);
+    return true;
+  }
+  /// render()!
+  componentDidUpdate(prevProps, prevState) {
+    console.log( 'DidUpdate', prevProps, prevState );
+  }
+
+  componentWillUnmount() {
+    console.log('WillUnmount');
+  }
+
+  
 }
 
 export default TodoApp;
