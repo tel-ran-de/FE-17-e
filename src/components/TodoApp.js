@@ -11,7 +11,8 @@ class TodoApp extends Component {
     super(props)
     this.state={
       title: 'My ToDo List',
-      todos: [{id:1, title: 'Hello', completed: false}]
+      todos: [{id:1, title: 'Hello', completed: false}],
+      count: 0
     }
     console.log('Contsructor');
   }
@@ -54,6 +55,9 @@ class TodoApp extends Component {
             <Form onAdd={this.addNewToDo} />
           </TodoContext.Provider>
         </section>
+        {this.state.count}
+        <br/>
+        <button onClick={()=>{ this.setState({...this.state, count: this.state.count + 1}) }} >Click</button>
         <section id="list">
           <TodoContext.Provider value={{
             onComplete: this.changeCompleteProp,
@@ -69,19 +73,24 @@ class TodoApp extends Component {
 
   componentDidMount() {
     console.log('DidMount');
-    fetch('https://jsonplaceholder.typicode.com/todos')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({...this.state, todos: [...this.state.todos, ...data]})
-      })
-      .catch (err => {
-        console.log(err.message);
-      })
+    // fetch('https://jsonplaceholder.typicode.com/todos')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({...this.state, todos: [...this.state.todos, ...data]})
+    //   })
+    //   .catch (err => {
+    //     console.log(err.message);
+    //   })
     
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('ShouldUpdate', nextProps, nextState);
+
+    if (this.state.count !== nextState.count) {
+      console.log( 'hello BigComp' )
+    }
+
     return true;
   }
   /// render()!
