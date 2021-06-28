@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.app {
+  margin: 300px 0;
+  text-align: center;
+  font-size: 28px;
+}
+
+.app button {
+  margin: 0 20px;
+  padding: 5px 25px;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+input {
+  font-size: 21px;
+  padding: 3px 5px;
+}

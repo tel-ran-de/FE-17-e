@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+import { connect } from 'react-redux'
 
-function App() {
+function App({count, minusCount, plusCount}) {
+
+  const [val, setVal] = useState(1)
+
+  const minusHandle = event => {
+    event.preventDefault()
+    minusCount(+document.querySelector('#val').value)
+  }
+
+  const plusHandle = event => {
+    event.preventDefault()
+    plusCount(+document.querySelector('#val').value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <input
+          type="number"
+          id="val"
+          value={val}
+          onChange={(event)=>{ setVal(+event.target.value) }}/>
+      <p>
+        <button
+          onClick={minusHandle}
+        >-</button>
+        { count }
+        <button
+          onClick={plusHandle}
+        >+</button>
+      </p>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    count: state.count
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    minusCount: (val) => dispatch({type: 'DECREASE', payload: val}),
+    plusCount: (val) => dispatch({type: 'INCREASE', payload: val}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
