@@ -1,2 +1,6 @@
 export const FETCH_USERS = 'FETCH_USERS'
 export const ADD_USER = 'ADD_USER'
+export const FETCH_TODOS = 'FETCH_TODOS'
+export const FETCH_POSTS = 'FETCH_POSTS'
+export const CLEAR_DATA = 'CLEAR_DATA'
+export const REMOVE_USER = 'REMOVE_USER'
