@@ -1,3 +1,5 @@
 node_modules
 .idea
 config/db.config.js
+logs/access.log
+logs/db-log.log

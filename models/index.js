@@ -1,4 +1,5 @@
 const config = require('../config/db.config')
+const logging = require('../config/db.logging')
 
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize(
@@ -15,7 +16,8 @@ const sequelize = new Sequelize(
             min: config.pool.min,
             acquire: config.pool.acquire,
             idle: config.pool.idle
-        }
+        },
+        logging: msg => logging.logStream.write(msg+"\n")
     }
 )
 
@@ -25,5 +27,6 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 
 db.persons = require('./person.model')(sequelize, Sequelize)
+db.users = require('./user.model')(sequelize, Sequelize)
 
 module.exports = db
