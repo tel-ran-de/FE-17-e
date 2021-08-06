@@ -7,6 +7,7 @@ const path = require('path')
 
 const db = require('./models')
 const dbLogging = require('./config/db.logging')
+const mdlw = require('./middleware')
 
 const personRouter = require('./routes/person.routes')
 
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 db.sequelize.sync({logging: msg => dbLogging.logStream.write(msg+"\n")})
 
-app.get('/', (req, res) => {
+app.get('/', [mdlw.authJwt.verifyToken], (req, res) => {
     res.status(200).json({message: 'Hello, world'})
 })
 
